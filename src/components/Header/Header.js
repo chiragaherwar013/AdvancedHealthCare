@@ -23,11 +23,11 @@ function Header() {
         </div>
         <Link to="/home">
           <div className="header__logoContainer">
-            <img src={"/images/a.svg"} alt="AHC Logo" />
+            <img src={"/images/a.svg"} alt="HW Logo" />
             {"\u00A0"}
-            <img src={"/images/h.svg"} alt="AHC Logo" />
+            <img src={"/images/h.svg"} alt="HW Logo" />
             {"\u00A0"}
-            <img src={"/images/c.svg"} alt="AHC Logo" />
+            <img src={"/images/c.svg"} alt="HW Logo" />
           </div>
         </Link>
         <div className="header__nav">

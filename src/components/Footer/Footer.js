@@ -17,7 +17,7 @@ function Footer() {
             </Link>
           </div>
           <div className="footer__brand-name">
-            <Link to="/home">Advanced Health Care</Link>
+            <Link to="/home">Heath Web</Link>
           </div>
           <div className="footer__left-body">
             <Link to="#">
@@ -49,7 +49,7 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="copyright"> AHC © 2020. All Rights Reserved</div>
+        <div className="copyright"> HW © 2020. All Rights Reserved</div>
       </div>
     </footer>
   );
