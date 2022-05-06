@@ -1,35 +1,39 @@
-import React, { useState } from "react";
-import "./BMI.css";
-import TextField from "@material-ui/core/TextField";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import { React, useState } from "react";
+
+// MUI Components
+import { TextField, Button, Typography } from "@mui/material";
+import { Stack, CircularProgress } from "@mui/material";
+
+// SnackBar
 import { useSnackbar } from "notistack";
 
-function BMI() {
+// Icons
+import CalculateIcon from "@mui/icons-material/SendRounded";
+
+import "./BMI.css";
+const BMI = () => {
+  // Loading SnackBar
   const { enqueueSnackbar } = useSnackbar();
 
+  // BMI States
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
   const [age, setAge] = useState(0);
-  const [page1, setPage1] = useState(true);
 
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#32A899",
-      },
-      secondary: {
-        main: "#31D570",
-      },
-    },
-  });
+  // Page
+  const [page, setPage] = useState(0);
+  const [Loading, setLoading] = useState(false);
 
   const handleSubmit = () => {
-    if (height < 1 || weight < 1 || age < 1) {
-      enqueueSnackbar("Please input correct values", { variant: "error" });
-      return;
-    }
-    setPage1(!page1);
+    setLoading(true);
+    setTimeout(() => {
+      setTimeout(false);
+      if (height < 1 || weight < 1 || age < 1) {
+        enqueueSnackbar("Please Input Correct Values", { variant: "error" });
+        return;
+      }
+      setPage(1);
+    }, 2000);
   };
 
   const getBMIResultMessage = () => {
@@ -78,97 +82,156 @@ function BMI() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="bmi">
-        {page1 ? (
-          <div className="bmi__firstPage">
-            <div className="bmi__calculatorContainer">
-              <div className="bmi__formContainer">
-                <h2 className="bmi__calculatorHeading">Calculate your BMI</h2>
-                <form className="bmi__form">
-                  <TextField
-                    label="Height (cm)"
-                    type="number"
-                    variant="outlined"
-                    onChange={(e) => setHeight(e.target.value)}
-                  />
-                  <TextField
-                    label="Weight (kg)"
-                    type="number"
-                    variant="outlined"
-                    onChange={(e) => setWeight(e.target.value)}
-                  />
-                  <TextField
-                    label="Age (yrs)"
-                    type="number"
-                    variant="outlined"
-                    onChange={(e) => setAge(e.target.value)}
-                  />
-                  <Button onClick={handleSubmit}>Calculate</Button>
-                </form>
+    <div className="bmi">
+      {!page ? (
+        <div className="bmi__firstPage">
+          <div className="bmi__calculatorContainer">
+            <Stack spacing={2}>
+              <Typography variant="h4"> Calculate Your BMI</Typography>
+              <form className="bmi__form">
+                <TextField
+                  label="Height (cm)"
+                  type="number"
+                  variant="outlined"
+                  onChange={(e) => setHeight(e.target.value)}
+                  error={height < 0}
+                  color={height > 40 ? "success" : "primary"}
+                />
+                <TextField
+                  label="Weight (kg)"
+                  type="number"
+                  variant="outlined"
+                  onChange={(e) => setWeight(e.target.value)}
+                  error={weight < 0}
+                  color={weight > 10 ? "success" : "primary"}
+                />
+                <TextField
+                  label="Age (yrs)"
+                  type="number"
+                  variant="outlined"
+                  onChange={(e) => setAge(e.target.value)}
+                  error={age < 0}
+                  color={age > 1 ? "success" : "primary"}
+                />
+                <Button
+                  onClick={handleSubmit}
+                  color="success"
+                  variant="contained"
+                  endIcon={
+                    Loading ? (
+                      <CircularProgress color="inherit" size={15} />
+                    ) : (
+                      <CalculateIcon />
+                    )
+                  }
+                  disabled={Loading}
+                >
+                  Calculate
+                </Button>
+              </form>
+            </Stack>
+          </div>
+          <div className="bmi__imgContainer">
+            <img src={"/images/fitness.svg"} />
+          </div>
+        </div>
+      ) : (
+        <div className="bmi__secondPage">
+          <div className="bmi__resultContainer">
+            <div className="bmi__resultHeader">
+              <div className="bmi__inputData">
+                <div>
+                  <img src={"/images/age.svg"} />
+                  <Typography variant="caption">
+                    <strong>{age}</strong>{" "}
+                    <Typography variant="caption" color="primary">
+                      <strong>years</strong>
+                    </Typography>
+                  </Typography>
+                </div>
+              </div>
+              <div className="bmi__inputData">
+                <div>
+                  <img src={"/images/height.svg"} />
+                  <Typography variant="caption">
+                    <strong>{height}</strong>{" "}
+                    <Typography variant="caption" color="primary">
+                      <strong>cm</strong>
+                    </Typography>
+                  </Typography>
+                </div>
+              </div>
+              <div className="bmi__inputData">
+                <div>
+                  <img src={"/images/scale.svg"} />
+                  <Typography variant="caption">
+                    <strong>{weight}</strong>{" "}
+                    <Typography variant="caption" color="primary">
+                      <strong>kg</strong>
+                    </Typography>
+                  </Typography>
+                </div>
               </div>
             </div>
-            <div className="bmi__imgContainer">
-              <img src={"/images/fitness.svg"} />
+            <div className="bmi__resultData">
+              <div className="bmi__resultBMI">
+                Your BMI : {((weight / (height * height)) * 10000).toFixed(2)}
+              </div>
+              <div className="bmi__resultMessage">
+                <Typography variant="body2">
+                  You are {getBMIResultMessage()}
+                </Typography>
+              </div>
+            </div>
+            <div className="bmi__waterContainer">
+              <img src={"/images/water.svg"} />
+              <Typography variant="body1">
+                Drink At least 8 litres of water daily
+              </Typography>
+            </div>
+            <div className="bmi__recommendations">
+              <table>
+                <tr>
+                  <td>
+                    <Typography variant="body2">
+                      Recommended Calories
+                    </Typography>
+                  </td>
+                  <td>
+                    <Typography variant="caption">
+                      {getRecommendedCalories()} per day
+                    </Typography>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Typography variant="body2">
+                      Recommended Body Weight
+                    </Typography>
+                  </td>
+                  <td>
+                    <Typography variant="caption">
+                      {((height * height * 21) / 10000).toFixed(2)} kg
+                    </Typography>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <Typography variant="body2">Recommended Deit</Typography>
+                  </td>
+                  <td>
+                    <Typography variant="caption">
+                      {getRecommendedDiet()}
+                    </Typography>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
-        ) : (
-          <div className="bmi__secondPage">
-            <div className="bmi__resultContainer">
-              <div className="bmi__resultHeader">
-                <div className="bmi__inputData">
-                  <div>
-                    <img src={"/images/age.svg"} />
-                    <p>{age} years</p>
-                  </div>
-                </div>
-                <div className="bmi__inputData">
-                  <div>
-                    <img src={"/images/height.svg"} />
-                    <p>{height} cm</p>
-                  </div>
-                </div>
-                <div className="bmi__inputData">
-                  <div>
-                    <img src={"/images/scale.svg"} />
-                    <p>{weight} kg</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bmi__resultData">
-                <div className="bmi__resultBMI">
-                  Your BMI : {((weight / (height * height)) * 10000).toFixed(2)}
-                </div>
-                <div className="bmi__resultMessage">
-                  <p>You are {getBMIResultMessage()}</p>
-                </div>
-              </div>
-              <div className="bmi__waterContainer">
-                <img src={"/images/water.svg"} />
-                <p>Drink At least 8 litres of water daily</p>
-              </div>
-              <div className="bmi__recommendations">
-                <table>
-                  <tr>
-                    <td>Recommended Calories</td>
-                    <td>{getRecommendedCalories()} per day</td>
-                  </tr>
-                  <tr>
-                    <td>Recommended Body Weight</td>
-                    <td>{((height * height * 21) / 10000).toFixed(2)} kg</td>
-                  </tr>
-                  <tr>
-                    <td>Recommended Diet</td>
-                    <td>{getRecommendedDiet()}</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    </ThemeProvider>
+        </div>
+      )}
+    </div>
   );
-}
+};
 
 export default BMI;

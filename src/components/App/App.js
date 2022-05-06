@@ -1,44 +1,44 @@
-import React, { useContext } from "react";
-import "./App.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { React, useContext } from "react";
+
+import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
 import { UserContext } from "../../Context/userContext";
+import "./App.css";
+
+// Components
 import Header from "../Header/Header";
-import Login from "../Login/Login";
-import Home from "../Home/Home";
-import BloodDonation from "../BloodDonation/BloodDonation";
+// import Login from "../Login/Login";
+// import Home from "../Home/Home";
+// import BloodDonation from "../BloodDonation/BloodDonation";
 import Yoga from "../Yoga/Yoga";
-import Profile from "../Profile/Profile";
-import Footer from "../Footer/Footer";
-import Covid from "../Covid/Covid";
-import Chatbot from "../Chatbot/Chatbot";
-import Admin from "../Admin/Admin";
+// import Profile from "../Profile/Profile";
+// import Footer from "../Footer/Footer";
+// import Covid from "../Covid/Covid";
+// import Chatbot from "../Chatbot/Chatbot";
+// import Admin from "../Admin/Admin";
 import BMI from "../BMI/BMI";
 
-function App() {
+const App = () => {
   const [user] = useContext(UserContext);
 
   return (
     <div className="app">
-      <Router>
+      <BrowserRouter>
         <Header />
-        <Chatbot />
-        <div className="app__body">
-          <main className="main">
-            <Switch>
-              <Route path="/home">
+        <Routes>
+          <Route path="/yogaAasans" element={<Yoga />} />
+          <Route path="/smartBMI" element={<BMI />} />
+
+          {/* <Chatbot /> */}
+
+          {/* <Route path="/home">
                 <Home />
               </Route>
-              <Route path="/smartBMI">
-                <BMI />
-              </Route>
+                
               <Route path="/bloodDonation">
                 <BloodDonation />
-              </Route>
-              <Route path="/yogaAasans">
-                <Yoga />
-              </Route>
-              <Route path="/profile/:email">
+              </Route> */}
+
+          {/* <Route path="/profile/:email">
                 <Profile />
               </Route>
               <Route path="/login">
@@ -52,14 +52,13 @@ function App() {
               </Route>
               <Route path="/">
                 {user ? <Redirect to="/home" /> : <Redirect to="/login" />}
-              </Route>
-            </Switch>
-          </main>
-          <Footer />
-        </div>
-      </Router>
+              </Route> */}
+
+          {/* <Footer /> */}
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;

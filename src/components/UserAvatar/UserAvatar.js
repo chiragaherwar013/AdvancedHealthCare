@@ -1,17 +1,17 @@
 import React, { useState, useContext } from "react";
 import "./UserAvatar.css";
 import { UserContext } from "../../Context/userContext";
-import { Avatar } from "@material-ui/core";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+
+// Mui Components
+import { Avatar, Menu, MenuItem } from "@mui/material";
 
 function UserAvatar() {
   const { enqueueSnackbar } = useSnackbar();
 
   const [user, setUser] = useContext(UserContext);
-  const history = useHistory();
+  const history = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
