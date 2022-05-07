@@ -3,7 +3,7 @@ import "./Chatbot.css";
 import { UserContext } from "../../Context/userContext";
 import ChatBot from "react-simple-chatbot";
 import { ThemeProvider } from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import funfacts from "./Funfacts";
 
 const theme = {
@@ -82,6 +82,11 @@ const steps = [
         label: "Give a random funfact",
         trigger: "funFact",
       },
+      {
+        value: "contact",
+        label: "Emergency",
+        trigger: "contact",
+      },
       { value: "exit", label: "Exit", trigger: "end" },
     ],
   },
@@ -101,7 +106,7 @@ const steps = [
       },
       { value: "smartBMI", label: "Smart BMI", trigger: "selectedService" },
       { value: "yogaAasans", label: "Yoga Aasans", trigger: "selectedService" },
-      { value: "covid-19", label: "Covid 19", trigger: "selectedService" },
+      { value: "portal", label: "IIITL Portal", trigger: "selectedService" },
       { value: "goBack", label: "go back", trigger: "options" },
     ],
   },
@@ -172,6 +177,12 @@ const steps = [
     trigger: "moreHelp",
   },
   {
+    id: "contact",
+    message:
+      "Here You Go. I am giving you contact Number of {available nurse} - +91 67628 87232. ",
+    trigger: "help",
+  },
+  {
     id: "end",
     message: "Thank you, see you again!",
     end: true,
@@ -199,7 +210,7 @@ function FunFact() {
 function Chatbot() {
   const [opened, setOpened] = useState(false);
   const [key, setKey] = useState(Math.random());
-  const history = useHistory();
+  const history = useNavigate();
   const [user] = useContext(UserContext);
 
   const handleEnd = ({ steps, values }) => {
@@ -207,19 +218,19 @@ function Chatbot() {
     // console.log(values);
     switch (values[values.length - 1]) {
       case "blogs":
-        history.push("/home");
+        history("/home");
         break;
       case "bloodDonation":
-        history.push("/bloodDonation");
+        history("/bloodDonation");
         break;
       case "smartBMI":
-        history.push("/smartBMI");
+        history("/smartBMI");
         break;
       case "yogaAasans":
-        history.push("/yogaAasans");
+        history("/yoga");
         break;
-      case "covid-19":
-        history.push("/covid-19");
+      case "portal":
+        history("/portal");
         break;
       default:
         break;
@@ -238,15 +249,15 @@ function Chatbot() {
           steps={steps}
           handleEnd={handleEnd}
           opened={opened}
-          headerTitle="Health assistant"
+          headerTitle="Health Assistant"
           botAvatar={"/images/ChatbotIcon.svg"}
-          userAvatar={user?.pic}
+          userAvatar={user?.profileImg}
           avatarStyle={{ borderRadius: "100%" }}
           floating={true}
           floatingIcon={
             <img
               src={"/images/ChatbotIcon.svg"}
-              style={{ width: "70%" }}
+              style={{ width: "60%" }}
               alt="chatBot icon"
             />
           }

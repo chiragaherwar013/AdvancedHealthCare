@@ -1,43 +1,42 @@
 import { React, useContext } from "react";
-
-import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
-import { UserContext } from "../../Context/userContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 // Components
 import Header from "../Header/Header";
-// import Login from "../Login/Login";
-// import Home from "../Home/Home";
-// import BloodDonation from "../BloodDonation/BloodDonation";
+import Login from "../Login/Login";
 import Yoga from "../Yoga/Yoga";
-// import Profile from "../Profile/Profile";
-// import Footer from "../Footer/Footer";
-// import Covid from "../Covid/Covid";
-// import Chatbot from "../Chatbot/Chatbot";
-// import Admin from "../Admin/Admin";
 import BMI from "../BMI/BMI";
+import Home from "../Home/Home";
+import BloodDonation from "../BloodDonation/BloodDonation";
+import Feed from "../Feed/Feed";
+
+// import Profile from "../Profile/Profile";
+// import Covid from "../Covid/Covid";
+import Chatbot from "../Chatbot/Chatbot";
+// import Admin from "../Admin/Admin";
+
+import Footer from "../Footer/Footer";
 
 const App = () => {
-  const [user] = useContext(UserContext);
-
   return (
     <div className="app">
       <BrowserRouter>
-        <Header />
         <Routes>
-          <Route path="/yogaAasans" element={<Yoga />} />
-          <Route path="/smartBMI" element={<BMI />} />
-
-          {/* <Chatbot /> */}
-
-          {/* <Route path="/home">
-                <Home />
-              </Route>
-                
-              <Route path="/bloodDonation">
-                <BloodDonation />
-              </Route> */}
-
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/yoga"
+            element={[<Header />, <Yoga />, <Chatbot />, <Footer />]}
+          />
+          <Route
+            path="/smartBMI"
+            element={[<Header />, , <Chatbot />, <BMI />]}
+          />
+          <Route
+            path="/bloodDonation"
+            element={[<Header />, <BloodDonation />, <Chatbot />, <Footer />]}
+          />
+          <Route path="/feed" element={[<Header />, <Feed />, <Chatbot />]} />
           {/* <Route path="/profile/:email">
                 <Profile />
               </Route>
@@ -53,8 +52,7 @@ const App = () => {
               <Route path="/">
                 {user ? <Redirect to="/home" /> : <Redirect to="/login" />}
               </Route> */}
-
-          {/* <Footer /> */}
+          <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </div>

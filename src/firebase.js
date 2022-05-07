@@ -1,13 +1,14 @@
 import firebase from "firebase";
 
 const firebaseApp = firebase.initializeApp({
-  apiKey: "AIzaSyBxLXXXvBHj3gdpUw5RqQzcasUzRn-tlIc",
-  authDomain: "advanced-health-care.firebaseapp.com",
-  projectId: "advanced-health-care",
-  storageBucket: "advanced-health-care.appspot.com",
-  messagingSenderId: "452686727524",
-  appId: "1:452686727524:web:7de0866e91ed76a1b45271",
-  measurementId: "G-4LF4FS1PSV",
+  apiKey: "AIzaSyBOC09p105xFDK3rPna5yD27NAkwVJ9F2k",
+  authDomain: "health-web-e0179.firebaseapp.com",
+  databaseURL: "https://health-web-e0179-default-rtdb.firebaseio.com",
+  projectId: "health-web-e0179",
+  storageBucket: "health-web-e0179.appspot.com",
+  messagingSenderId: "722530679753",
+  appId: "1:722530679753:web:9cd8fc76111c7ed7dac618",
+  measurementId: "G-XPWYWSZ2Y3",
 });
 
 const db = firebase.firestore();

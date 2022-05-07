@@ -1,181 +1,131 @@
-import React from "react";
-import "./Login.css";
-import { Link } from "react-router-dom";
-import JoinUs from "../JoinUs/JoinUs";
+import { React, useContext } from "react";
+import { auth, provider, db } from "../../firebase";
 
-function Login() {
+import { useSnackbar } from "notistack";
+import { UserContext } from "../../Context/userContext";
+import { useNavigate } from "react-router-dom";
+
+// MUI Components
+import { Stack, Button } from "@mui/material";
+
+// Icons
+import GoogleIcon from "@mui/icons-material/Google";
+
+const Login = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const [, setUser] = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((response) => {
+        if (response.user.email.split("@")[1] === "iiitl.ac.in") {
+          db.collection("users")
+            .add({
+              name: response.user.displayName,
+              email: response.user.email,
+              profileImg: response.user.photoURL,
+            })
+            .then((res) => {
+              // console.log(res);
+
+              localStorage.setItem(
+                "healthWeb-user",
+                JSON.stringify({
+                  name: response.user.displayName,
+                  email: response.user.email,
+                  profileImg: response.user.photoURL,
+                })
+              );
+              setUser({
+                name: response.user.displayName,
+                email: response.user.email,
+                profileImg: response.user.photoURL,
+              });
+              navigate("/profile");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          enqueueSnackbar("Sign Up failed. Only for IIITL Students", {
+            variant: "error",
+          });
+        }
+      })
+      .catch((error) => {});
+  };
+
+  const handleSignIn = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((response) => {
+        db.collection("users")
+          .where("email", "==", response.user.email)
+          .get()
+          .then((res) => {
+            if (res.docs.map((doc) => doc.data()).length > 0) {
+              localStorage.setItem(
+                "healthWeb-user",
+                JSON.stringify({
+                  name: response.user.displayName,
+                  email: response.user.email,
+                  profileImg: response.user.photoURL,
+                })
+              );
+              setUser({
+                name: response.user.displayName,
+                email: response.user.email,
+                profileImg: response.user.photoURL,
+              });
+              enqueueSnackbar("Successfully signed in", { variant: "success" });
+              navigate("/feed");
+            } else {
+              enqueueSnackbar("you don't have account, Sign Up to continue", {
+                variant: "error",
+              });
+            }
+          });
+      })
+      .catch((error) => {
+        console.log(error.message);
+        enqueueSnackbar("An error occured, try again later!", {
+          variant: "error",
+        });
+      });
+  };
+
   return (
-    <div className="login">
-      <section id="top_page">
-        <div className="landing__page__container">
-          <div className="wrapper__wave">
-            <div className="wave"></div>
-          </div>
-          <div className="Ahc__logo animate__animated animate__fadeInDown">
-            AHC
-          </div>
-          <div className="Ahc__brand__name animate__animated animate__fadeInDown">
-            Advanced Health Care{" "}
-          </div>
-          <div className="Ahc__services__button">
-            <a href="#our-services">
-              <p> Our Services</p>
-            </a>
-          </div>
-        </div>
-      </section>
-      <section id="our-services" className="Ahc__services">
-        <div className="heading__our-services">Our Services</div>
-        <div className="services__grid">
-          {/* A flipping cell  */}
-          <Link to="/bloodDonation">
-            {" "}
-            <div className="services__grid-cell flip__card">
-              <div className="flip__card-inner">
-                <div className="flip__card-front">
-                  <img
-                    src={`/images/blood-donation.svg`}
-                    alt="blood-donation"
-                  />
-                  <h2> Blood Donation</h2>
-                </div>
-                <div className="flip__card-back">
-                  <h2>Blood Donation</h2>
-                  <p>
-                    We are Building a Health Centered Community to Sustain and
-                    Increase Reliable Blood Donors. Donated Blood? Join Us, Let
-                    others know your kindful Work!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
-          {/* A flipping cell  */}
-          <Link to="/smartBMI">
-            <div className="services__grid-cell flip__card">
-              <div className="flip__card-inner">
-                <div className="flip__card-front">
-                  <img src={`/images/bmi.svg`} alt="Smart-BMI Calculator" />
-                </div>
-                <div className="flip__card-back">
-                  <h2>Smart BMI</h2>
-                  <p>
-                    Calculate your Body Mass Index smartly. Our smart calcultor
-                    also suggest your Health status, Preferred weight, Daily
-                    intake calorie and much more
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
-          {/* A flipping cell  */}
-          <Link to="/covid-19">
-            <div className="services__grid-cell flip__card">
-              <div className="flip__card-inner">
-                <div className="flip__card-front">
-                  <img
-                    src={`/images/covid_support.svg`}
-                    alt="Covid-19 Support"
-                  />
-                  <h2> Covid Support </h2>
-                </div>
-                <div className="flip__card-back">
-                  <h2>Covid-19 Support</h2>
-                  <p>
-                    We are with you in this havoc. Get Latest Covid Stats, Know
-                    the Precautions and Use our Symptom checker for Covid for
-                    better help.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
-          {/* A flipping cell  */}
-          <Link to="/yogaAasans">
-            <div className="services__grid-cell flip__card">
-              <div className="flip__card-inner">
-                <div className="flip__card-front">
-                  <img src={`/images/lotus.svg`} alt="3D Yoga Asanas" />
-                  <h2> 3D Yoga Asanas </h2>
-                </div>
-                <div className="flip__card-back">
-                  <h2>3D Yoga Asanas</h2>
-                  <p>
-                    We promote healthy life, watch our 3D yoga asanas and know
-                    thier benifits.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
-
-          <Link to="/home">
-            <div className="services__grid-cell flip__card">
-              <div className="flip__card-inner">
-                <div className="flip__card-front">
-                  <img src={`/images/chat-bot.svg`} alt="Chat-bot" />
-                  <h2> Medi-BoT</h2>
-                </div>
-                <div className="flip__card-back">
-                  <h2>Medi-BoT</h2>
-                  <p>
-                    Medi-BoT is here to Assist you. It can answer your first
-                    hand queries in no-time with lot of other features.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
-
-          <Link to="/home">
-            <div className="services__grid-cell flip__card">
-              <div className="flip__card-inner">
-                <div className="flip__card-front">
-                  <img src={`/images/blog.svg`} alt="blog-feed" />
-                  <h2> Share Your Thoughts! </h2>
-                </div>
-                <div className="flip__card-back">
-                  <h2> Share Your Thoughts!</h2>
-                  <p>
-                    We welcome you to join our community and share your
-                    experiences about life, health or anything that calms your
-                    mind.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </div>
-        <div className="Join__us_button">
-          <a href="#join-us">
-            <p> Join Us </p>
-          </a>
-        </div>
-      </section>
-      <section
-        id="join-us"
-        className="Join__us"
-        style={{ backgroundImage: `url(/images/city__welcome.jpg)` }}
+    <Stack direction="row" spacing={2}>
+      <Button
+        onClick={handleSignIn}
+        sx={{
+          backgroundColor: "#DB4437",
+          "&:hover": {
+            backgroundColor: "rgba(219,68,55,0.9)",
+          },
+        }}
+        variant="contained"
+        startIcon={<GoogleIcon />}
       >
-        <div className="Join__us_container">
-          <div className="Join__us_heading"> Join Us </div>
-          <div className="buttons__box">
-            {/* <div className="sign__in_box">
-              <button class="w3-button w3-khaki w3-hover-teal w3-xxxlarge">
-                Login
-              </button>
-            </div>
-            <div className="sign__up_box">
-              <button class="w3-button w3-khaki w3-hover-teal w3-xxxlarge">
-                Sign Up
-              </button>
-            </div> */}
-            <JoinUs />
-          </div>
-        </div>
-      </section>
-    </div>
+        Login
+      </Button>
+      <Button
+        onClick={handleSignUp}
+        sx={{
+          backgroundColor: "#0F9D58",
+          "&:hover": {
+            backgroundColor: "rgba(15,157,88,0.9)",
+          },
+        }}
+        variant="contained"
+        startIcon={<GoogleIcon />}
+      >
+        Sign Up
+      </Button>
+    </Stack>
   );
-}
+};
 
 export default Login;

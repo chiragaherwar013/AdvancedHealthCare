@@ -2,15 +2,14 @@ import React, { useState, useContext } from "react";
 import "./JoinUs.css";
 import { UserContext } from "../../Context/userContext";
 import { auth, provider } from "../../firebase";
-import { useHistory } from "react-router-dom";
-import { db } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 
 function JoinUs() {
   const { enqueueSnackbar } = useSnackbar();
 
   const [, setUser] = useContext(UserContext);
-  const history = useHistory();
+  const history = useNavigate();
 
   const [DOB, setDOB] = useState("");
   const [gender, setGender] = useState("");

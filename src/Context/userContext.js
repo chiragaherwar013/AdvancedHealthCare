@@ -4,7 +4,7 @@ export const UserContext = createContext();
 
 export const CurrentUserProvider = (props) => {
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("ahc_userDetails"))
+    JSON.parse(localStorage.getItem("healthWeb-user"))
   );
 
   return (

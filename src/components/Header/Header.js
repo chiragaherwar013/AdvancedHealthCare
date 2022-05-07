@@ -1,10 +1,10 @@
 import { React, useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/userContext";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
 // MUI Components
-import { AppBar, Toolbar, Stack, Button, Typography } from "@mui/material";
+import { AppBar, Toolbar, Stack, Typography, Button } from "@mui/material";
 
 // Icons
 import HomeIcon from "@mui/icons-material/HomeRounded";
@@ -15,7 +15,7 @@ import IIITLIcon from "@mui/icons-material/ApartmentRounded";
 
 const Header = () => {
   const [user] = useContext(UserContext);
-
+  const navigate = useNavigate();
   const HeadLink = (props) => {
     return (
       <Link to={props.to}>
@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <Link to="/home">
+        <Link to="/feed">
           <Typography variant="h4">Health Web</Typography>
         </Link>
         <Stack
@@ -52,7 +52,7 @@ const Header = () => {
           spacing={3}
         >
           <HeadLink
-            to="/home"
+            to="/feed"
             label="Home"
             Icon={<HomeIcon sx={{ fontSize: "16px" }} />}
           />
@@ -67,7 +67,7 @@ const Header = () => {
             Icon={<BMIIcon sx={{ fontSize: "16px" }} />}
           />
           <HeadLink
-            to="/yogaAasans"
+            to="/yoga"
             label="Yoga"
             Icon={<YogaIcon sx={{ fontSize: "16px" }} />}
           />
@@ -80,9 +80,11 @@ const Header = () => {
         {user ? (
           <UserAvatar />
         ) : (
-          <Button color="secondary" variant="contained">
-            Login
-          </Button>
+          <Link to="/">
+            <Button variant="contained" color="warning" size="small">
+              Join Us
+            </Button>
+          </Link>
         )}
       </Toolbar>
     </AppBar>

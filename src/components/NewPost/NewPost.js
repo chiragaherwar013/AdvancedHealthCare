@@ -1,13 +1,13 @@
 import React, { useState, useContext } from "react";
-import "./NewPost.css";
 import { UserContext } from "../../Context/userContext";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-import { Button } from "@material-ui/core";
 import { storage, db } from "../../firebase";
 import firebase from "firebase";
 import { useSnackbar } from "notistack";
+import "./NewPost.css";
+
+import TextField from "@mui/material/TextField";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import { Button } from "@mui/material";
 
 function NewPost() {
   const { enqueueSnackbar } = useSnackbar();
@@ -17,17 +17,6 @@ function NewPost() {
   const [message, setMessage] = useState("");
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
-
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: "#32A899",
-      },
-      secondary: {
-        main: "#31D570",
-      },
-    },
-  });
 
   const handleImageChange = (e) => {
     if (e.target.files[0]) {
@@ -71,7 +60,7 @@ function NewPost() {
                 title,
                 message,
                 imgUrl,
-                likes: [],
+                likes: 0,
                 comments: [],
               })
               .then(() => {
@@ -103,49 +92,46 @@ function NewPost() {
   return (
     <>
       {user ? (
-        <ThemeProvider theme={theme}>
-          <div className="newPost">
-            <div className="newPost__Container">
-              <h2 className="newPost__heading">Your Thoughts ?</h2>
-              <TextField
-                type="text"
-                value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                label="Post title"
-                required
-              />
-              <TextField
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                label="What's your message?"
-                className="home__postTextField"
-                required
-              />
-              <div className="newPost__ImageContainer">
-                <label for="image" className="newPost__Image">
-                  <AddAPhotoIcon />
-                </label>
-                <input id="image" type="file" onChange={handleImageChange} />
-
-                {progress > 0 ? (
-                  <progress
-                    value={progress}
-                    max="100"
-                    className="newPost__progress"
-                  />
-                ) : (
-                  <p className="newPost__ImageName">{image?.name}</p>
-                )}
-              </div>
-              <div className="newPost__Button">
-                <Button onClick={handlePostSubmit}>Post</Button>
-              </div>
+        <div className="newPost">
+          <div className="newPost__Container">
+            <h2 className="newPost__heading">Your Thoughts ?</h2>
+            <TextField
+              type="text"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              label="Post title"
+              required
+            />
+            <TextField
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              label="What's your message?"
+              className="home__postTextField"
+              required
+            />
+            <div className="newPost__ImageContainer">
+              <label for="image" className="newPost__Image">
+                <AddAPhotoIcon />
+              </label>
+              <input id="image" type="file" onChange={handleImageChange} />
+              {progress > 0 ? (
+                <progress
+                  value={progress}
+                  max="100"
+                  className="newPost__progress"
+                />
+              ) : (
+                <p className="newPost__ImageName">{image?.name}</p>
+              )}
+            </div>
+            <div className="newPost__Button">
+              <Button onClick={handlePostSubmit}>Post</Button>
             </div>
           </div>
-        </ThemeProvider>
+        </div>
       ) : (
         ""
       )}

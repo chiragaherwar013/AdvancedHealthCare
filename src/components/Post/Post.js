@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./Post.css";
 import { UserContext } from "../../Context/userContext";
-import { Avatar } from "@material-ui/core";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
-import ChatIcon from "@material-ui/icons/Chat";
-import SendIcon from "@material-ui/icons/Send";
 import { db } from "../../firebase";
 import { Link } from "react-router-dom";
+
+import { Avatar } from "@mui/material";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ChatIcon from "@mui/icons-material/Chat";
+import SendIcon from "@mui/icons-material/Send";
 
 function Post({
   id,
@@ -24,7 +25,7 @@ function Post({
   const [user] = useContext(UserContext);
   const [newComment, setNewComment] = useState("");
   const [viewComments, setViewComments] = useState(false);
-  const [postLiked, setPostLiked] = useState(likes.includes(user?.email));
+  const [postLiked, setPostLiked] = useState(likes);
 
   useEffect(() => {
     comments.sort((a, b) => {
