@@ -1,0 +1,161 @@
+[
+  {
+    "medicineType": "Tablet",
+    "medicineName": "ACECLONDL-SP-127",
+    "medicineQty": "33"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "ACiLOE 104",
+    "medicineQty": "35"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "ALGROT 108-102",
+    "medicineQty": "21"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "CIPLOX-500mg",
+    "medicineQty": "24"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "CEFIXIME-200mg",
+    "medicineQty": "38"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "CALPOL-500mg",
+    "medicineQty": "35"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "COMBIELAM",
+    "medicineQty": "31"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "CETRIZIN-10mg",
+    "medicineQty": "35"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "CHESTON-COLD",
+    "medicineQty": "28"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "GEFVI - Z Cvitamin-C)",
+    "medicineQty": "26"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "DIGENE - 500mg",
+    "medicineQty": "20"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "DROTIN",
+    "medicineQty": "24"
+  },
+
+  {
+    "medicineType": "Injection",
+    "medicineName": "DNS - 500 ml",
+    "medicineQty": "35"
+  },
+
+  {
+    "medicineType": "Injection",
+    "medicineName": "DROTIN",
+    "medicineQty": "29"
+  },
+
+  {
+    "medicineType": "Injection",
+    "medicineName": "DEXONA",
+    "medicineQty": "27"
+  },
+
+  {
+    "medicineType": "Injection",
+    "medicineName": "DYNAPAR",
+    "medicineQty": "38"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "DOLO- 650 MG",
+    "medicineQty": "36"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "METROGYL-400mg",
+    "medicineQty": "31"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "MONTEC -LE",
+    "medicineQty": "33"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "OLEX -OZ 82",
+    "medicineQty": "25"
+  },
+
+  {
+    "medicineType": "Tablet",
+    "medicineName": "OMNACORTIL",
+    "medicineQty": "23"
+  },
+
+  {
+    "medicineType": "Injection",
+    "medicineName": "BUSCOPAM",
+    "medicineQty": "38"
+  },
+
+  {
+    "medicineType": "Cream",
+    "medicineName": "BERNEAL",
+    "medicineQty": "22"
+  },
+
+  {
+    "medicineType": "Cream",
+    "medicineName": "BERNHEAL",
+    "medicineQty": "24"
+  },
+  {
+    "medicineType": "Cream",
+    "medicineName": "BETADENE",
+    "medicineQty": "25"
+  },
+
+  {
+    "medicineType": "Cream",
+    "medicineName": "DERMAZ-KT",
+    "medicineQty": "31"
+  },
+  {
+    "medicineType": "Cream",
+    "medicineName": "OMNIGEL",
+    "medicineQty": "25"
+  }
+]

@@ -20,7 +20,7 @@ const UserAvatar = () => {
     setAnchorEl(null);
     switch (selectedItem) {
       case "profile":
-        history.push(`/profile/${user?.email}`);
+        history(`/profile/${user?.email}`);
         break;
       case "logout":
         localStorage.removeItem("healthWeb-user");

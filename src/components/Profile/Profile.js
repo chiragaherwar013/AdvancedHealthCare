@@ -1,8 +1,8 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
-import {useParams} from "react-router-dom";
-import {UserContext} from "../../Context/userContext";
-import {db} from "../../firebase";
+import { useParams } from "react-router-dom";
+import { UserContext } from "../../Context/userContext";
+import { db } from "../../firebase";
 
 function Profile() {
   const [user] = useContext(UserContext);
@@ -25,21 +25,22 @@ function Profile() {
       {userDetails ? (
         <div className="profile">
           <div className="profile_card">
-            <img src={userDetails.pic} alt={userDetails.pic} width="100%" />
+            <img
+              src={userDetails.profileImg}
+              alt={userDetails.name}
+              width="100%"
+            />
             <p className="name">{userDetails.name}</p>
             <p className="email">{userDetails.email}</p>
             <p>{userDetails.gender}</p>
             {/* DOB is not shown to other person */}
             {userDetails.email === user.email ? <p>{userDetails.DOB}</p> : ""}
             <p className="blood-group">{userDetails.bloodGroup}</p>
-            <p>
+            {/* <p>
               {" "}
               Blood Donated :{" "}
-              <p className="blood-amount">
-                {userDetails.totalBloodDonated}
-              </p>{" "}
-              Units
-            </p>
+              <p className="blood-amount">{userDetails.bloodDonated}</p> Units
+            </p> */}
           </div>
         </div>
       ) : (

@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <Link to="/feed">
+        <Link to="/">
           <Typography variant="h4">Health Web</Typography>
         </Link>
         <Stack

@@ -10,8 +10,8 @@ import BMI from "../BMI/BMI";
 import Home from "../Home/Home";
 import BloodDonation from "../BloodDonation/BloodDonation";
 import Feed from "../Feed/Feed";
-
-// import Profile from "../Profile/Profile";
+import Portal from "../Portal/portal";
+import Profile from "../Profile/Profile";
 // import Covid from "../Covid/Covid";
 import Chatbot from "../Chatbot/Chatbot";
 // import Admin from "../Admin/Admin";
@@ -37,21 +37,11 @@ const App = () => {
             element={[<Header />, <BloodDonation />, <Chatbot />, <Footer />]}
           />
           <Route path="/feed" element={[<Header />, <Feed />, <Chatbot />]} />
-          {/* <Route path="/profile/:email">
-                <Profile />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/covid-19">
-                <Covid />
-              </Route>
-              <Route path="/admin">
-                <Admin />
-              </Route>
-              <Route path="/">
-                {user ? <Redirect to="/home" /> : <Redirect to="/login" />}
-              </Route> */}
+          <Route
+            path="/portal"
+            element={[<Header />, <Portal />, <Footer />]}
+          />
+          <Route path="/profile/:email" element={[<Header />, <Profile />]} />
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>

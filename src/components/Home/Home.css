@@ -1,0 +1,40 @@
+.landing__page__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.wrapper__wave {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(to top, #3586e2 0%, #e7f0fd 100%);
+    overflow: hidden;
+}
+
+.wave {
+    width: 100vw;
+    height: 100vw;
+    position: absolute;
+    margin-left: -45%;
+    margin-top: -25%;
+    border-radius: 35%;
+    background: rgba(255, 255, 255, 0.75);
+    animation: wave 15s infinite linear;
+}
+
+@keyframes wave {
+    from {
+        transform: rotate(0deg);
+    }
+
+    from {
+        transform: rotate(360deg);
+    }
+}
