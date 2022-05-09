@@ -125,9 +125,10 @@ const Portal = () => {
                 <Typography variant="body2">
                   <strong>Contacts</strong>
                 </Typography>
-                <Typography variant="caption">+91 - XXXXX XXXXX</Typography>
-                <Typography variant="caption">+91 - XXXXX XXXXX</Typography>
-                <Typography variant="caption">+91 - XXXXX XXXXX</Typography>
+                <Typography variant="caption">+91 - 9810181256</Typography>
+                <Typography variant="caption">+91 - 9868247231</Typography>
+                <Typography variant="caption">+91 - 9993380480</Typography>
+                <Typography variant="caption">+91 - 8770180714</Typography>
               </Stack>
             </Paper>
             <Button
