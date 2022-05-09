@@ -1,6 +1,8 @@
-import { React, useContext } from "react";
+import { React, useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/userContext";
 import MedicineData from "./Medicine.json";
+import { useSnackbar } from "notistack";
 
 // MUI Components
 import { Stack, Paper, Typography, Avatar } from "@mui/material";
@@ -60,6 +62,16 @@ const Care = (props) => {
 
 const Portal = () => {
   const [user, setUser] = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+  const handleUpdate = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      enqueueSnackbar("Updated medicines", { variant: "success" });
+      setIsLoading(false);
+    }, 2000);
+  };
   return (
     <>
       {!user ? (
@@ -135,6 +147,7 @@ const Portal = () => {
               variant="contained"
               color="primary"
               startIcon={<TimeIcon />}
+              onClick={() => navigate("/appointment")}
             >
               Book Appointment
             </Button>
@@ -150,8 +163,8 @@ const Portal = () => {
             <Care type="Injection" img="/images/syringe.png" />
             <Care type="Cream" img="/images/cream.png" />
           </Stack>
-          <Button variant="outlined" color="warning">
-            Update Medicinal Data
+          <Button variant="outlined" color="warning" onClick={handleUpdate}>
+            {isLoading ? "Loading" : "Update Medicinal Data"}
           </Button>
         </Stack>
       )}

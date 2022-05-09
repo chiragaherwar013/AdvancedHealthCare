@@ -15,6 +15,7 @@ import Profile from "../Profile/Profile";
 // import Covid from "../Covid/Covid";
 import Chatbot from "../Chatbot/Chatbot";
 // import Admin from "../Admin/Admin";
+import Appointment from "../Appointment/Appointment";
 
 import Footer from "../Footer/Footer";
 
@@ -42,6 +43,10 @@ const App = () => {
             element={[<Header />, <Portal />, <Footer />]}
           />
           <Route path="/profile/:email" element={[<Header />, <Profile />]} />
+          <Route
+            path="/appointment"
+            element={[<Header />, <Appointment />, <Footer />]}
+          />
           <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>

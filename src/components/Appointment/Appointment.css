@@ -1,0 +1,17 @@
+.appointment_container {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.appointment_container div {
+    margin: 10px;
+}
+
+.appointment_timeSlot {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
