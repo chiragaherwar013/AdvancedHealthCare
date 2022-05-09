@@ -81,12 +81,12 @@ const Portal = () => {
               <Stack justifyContent="center" alignItems="center" spacing={1}>
                 <Avatar src="" alt="doctor" sx={{ height: 100, width: 100 }} />
                 <Typography variant="body1">
-                  <strong>Doctor Name</strong>
+                  <strong>Dr. ABC</strong>
                 </Typography>
                 <Typography variant="body2">
                   <strong>Contact</strong>
                 </Typography>
-                <Typography variant="caption">+91 - XXXXX XXXXX</Typography>
+                <Typography variant="caption">01125532553</Typography>
               </Stack>
             </Paper>
             <Paper
@@ -101,12 +101,12 @@ const Portal = () => {
               <Stack justifyContent="center" alignItems="center" spacing={1}>
                 <Avatar src="" alt="doctor" sx={{ height: 100, width: 100 }} />
                 <Typography variant="body1">
-                  <strong>Doctor Name</strong>
+                  <strong>Ms. Deepika</strong>
                 </Typography>
                 <Typography variant="body2">
                   <strong>Contact</strong>
                 </Typography>
-                <Typography variant="caption">+91 - XXXXX XXXXX</Typography>
+                <Typography variant="caption">7987316503</Typography>
               </Stack>
             </Paper>
             <Paper
